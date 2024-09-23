@@ -18,6 +18,24 @@
 
         <menuitem id="menu_monthly_bank_report" name="Monthly Bank Report" parent="hr_payroll.menu_hr_payroll_report" action="ba_payroll_extension.action_monthly_bank_report_wizard"/>
 
+
+        <record id="action_p10_report_wizard" model="ir.actions.act_window">
+            <field name="name">Employee Details</field>
+            <field name="res_model">p10.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_p10_report" name="Employee Details" parent="hr_payroll.menu_hr_payroll_report" action="ba_payroll_extension.action_p10_report_wizard"/>
+
+        <record id="action_p10_m_report_wizard" model="ir.actions.act_window">
+            <field name="name">Affordable Housing Levy</field>
+            <field name="res_model">p10.m.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_p10_m_report" name="Affordable Housing Levy" parent="hr_payroll.menu_hr_payroll_report" action="ba_payroll_extension.action_p10_m_report_wizard"/>
         <!-- Inherit the existing payslip form -->
         <record id="hr_payslip_form_inherit_overtime" model="ir.ui.view">
             <field name="name">hr.payslip.form.overtime</field>

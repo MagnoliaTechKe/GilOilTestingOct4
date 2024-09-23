@@ -16,42 +16,51 @@ class HrPayslip(models.Model):
     overtime_amount_sunday_holiday = fields.Float(string='Overtime Amount (Sunday/Public Holidays)',
                                                   compute='_compute_overtime_amount')
 
-    @api.depends('employee_id', 'date_from', 'date_to')
-    def _compute_overtime_hours(self):
-        for payslip in self:
-            overtime_weekdays_minutes = 0
-            overtime_sunday_holiday_minutes = 0
+    from odoo import models, fields, api
 
-            # Fetch actual attendance records for the employee
-            attendance_records = self.env['hr.attendance'].search([
-                ('employee_id', '=', payslip.employee_id.id),
-                ('check_in', '>=', payslip.date_from),
-                ('check_out', '<=', payslip.date_to)
-            ])
+    class HrPayslip(models.Model):
+        _inherit = 'hr.payslip'
 
-            # Get the work schedule and public holidays
-            public_holidays = self._get_public_holidays(payslip.date_from, payslip.date_to)
+        overtime_hours_weekdays = fields.Float(string='Overtime Hours (Weekdays)', compute='_compute_overtime_hours')
+        overtime_hours_sunday_holiday = fields.Float(string='Overtime Hours (Sunday/Holiday)',
+                                                     compute='_compute_overtime_hours')
 
-            for attendance in attendance_records:
-                attendance_day = attendance.check_in.weekday()  # 0 = Monday, 6 = Sunday
-                overtime_hours = attendance.overtime_hours  # Assume this is a float representing hours
+        @api.depends('employee_id', 'date_from', 'date_to')
+        def _compute_overtime_hours(self):
+            for payslip in self:
+                overtime_weekdays_minutes = 0
+                overtime_sunday_holiday_minutes = 0
 
-                # Convert the float to hours and minutes
-                hours = int(overtime_hours)
-                minutes = int((overtime_hours - hours) * 60)
-                total_minutes = hours * 60 + minutes
+                # Fetch actual attendance records for the employee
+                attendance_records = self.env['hr.attendance'].search([
+                    ('employee_id', '=', payslip.employee_id.id),
+                    ('check_in', '>=', payslip.date_from),
+                    ('check_out', '<=', payslip.date_to)
+                ])
 
-                # Check if it's a Sunday or public holiday
-                if attendance_day == 6 or attendance.check_in.date() in public_holidays:
-                    # Overtime 2 for Sundays and Public Holidays
-                    overtime_sunday_holiday_minutes += total_minutes
-                elif 0 <= attendance_day <= 4:  # Weekdays (Monday to Friday)
-                    # Overtime for weekdays
-                    overtime_weekdays_minutes += total_minutes
+                # Get the work schedule and public holidays
+                public_holidays = self._get_public_holidays(payslip.date_from, payslip.date_to)
 
-            # Convert total minutes back to float hours
-            payslip.overtime_hours_weekdays = overtime_weekdays_minutes / 60.0
-            payslip.overtime_hours_sunday_holiday = overtime_sunday_holiday_minutes / 60.0
+                for attendance in attendance_records:
+                    attendance_day = attendance.check_in.weekday()  # 0 = Monday, 6 = Sunday
+                    overtime_hours = attendance.overtime_hours  # Assume this is a float representing hours
+
+                    # Convert the float to hours and minutes
+                    hours = int(overtime_hours)
+                    minutes = int((overtime_hours - hours) * 60)
+                    total_minutes = hours * 60 + minutes
+
+                    # Check if it's a Sunday or public holiday
+                    if attendance_day == 6 or attendance.check_in.date() in public_holidays:
+                        # Overtime 2 for Sundays and Public Holidays
+                        overtime_sunday_holiday_minutes += total_minutes
+                    elif 0 <= attendance_day <= 4:  # Weekdays (Monday to Friday)
+                        # Overtime for weekdays
+                        overtime_weekdays_minutes += total_minutes
+
+                # Convert total minutes back to float hours
+                payslip.overtime_hours_weekdays = overtime_weekdays_minutes / 60.0
+                payslip.overtime_hours_sunday_holiday = overtime_sunday_holiday_minutes / 60.0
 
     # @api.depends('employee_id', 'date_from', 'date_to')
     # def _compute_overtime_hours(self):
@@ -63,26 +72,26 @@ class HrPayslip(models.Model):
     #             ('date', '>=', payslip.date_from),
     #             ('date', '<=', payslip.date_to)
     #         ])
-
+    #
     #         public_holidays = self._get_public_holidays(payslip.date_from, payslip.date_to)
-
+    #
     #         # Iterate over timesheets to calculate overtime
     #         for timesheet in timesheets:
     #             timesheet_day = str(timesheet.date.weekday())  # Get the day of the week (0 = Monday, 6 = Sunday)
     #             worked_hours = timesheet.unit_amount  # Number of hours worked that day
-
+    #
     #             # Find the corresponding work schedule for that day
     #             attendance = payslip.employee_id.resource_calendar_id.attendance_ids.filtered(
     #                 lambda a: a.dayofweek == timesheet_day
     #             )
-
+    #
     #             if timesheet_day == '6' or timesheet.date in public_holidays:
     #                 # Overtime 2 for Sundays and Public Holidays
     #                 overtime_sunday_holiday += worked_hours
     #             elif 0 <= int(timesheet_day) <= 4:  # Only weekdays (Monday to Friday)
     #                 if attendance:
     #                     total_scheduled_hours = 0
-
+    #
     #                     for att in attendance:
     #                         if att.day_period != 'lunch':
     #                             scheduled_hours = att.hour_to - att.hour_from
@@ -93,7 +102,7 @@ class HrPayslip(models.Model):
     #                 else:
     #                     # If no attendance is found for the day, consider all hours as overtime
     #                     overtime_weekdays += worked_hours
-
+    #
     #         # Set the computed overtime hours
     #         payslip.overtime_hours_weekdays = overtime_weekdays
     #         payslip.overtime_hours_sunday_holiday = overtime_sunday_holiday

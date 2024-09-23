@@ -13,7 +13,7 @@ result = (contract.wage / 192) * payslip.overtime_hours_weekdays * 1.5
         ]]>
     </field>
         <field name="appears_on_payslip">True</field>
-         <field name="struct_id" ref="hr_payroll.structure_002"/>
+         <field name="struct_id" ref="l10n_ke_hr_payroll.hr_payroll_structure_ken_employee_salary"/>
     </record>
 
     <!-- Overtime 2 Salary Rule -->
@@ -30,7 +30,7 @@ result = (contract.wage / 192) * payslip.overtime_hours_sunday_holiday * 2
         ]]>
         </field>
         <field name="appears_on_payslip">True</field>
-        <field name="struct_id" ref="hr_payroll.structure_002"/>
+        <field name="struct_id" ref="l10n_ke_hr_payroll.hr_payroll_structure_ken_employee_salary"/>
     </record>
 
 
