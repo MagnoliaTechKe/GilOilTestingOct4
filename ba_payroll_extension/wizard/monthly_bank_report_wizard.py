@@ -50,7 +50,7 @@ class MonthlyBankReportWizard(models.TransientModel):
             employee = payslip.employee_id
             bank_account = employee.bank_account_id
             report_values.append(employee.identification_id or '')
-            report_values.append(bank_account.bank_id.name or '')
+            report_values.append(bank_account.bank_id.bic or '')
             report_values.append(employee.name or '')
             report_values.append(bank_account.acc_number or '')
             report_values.append(payslip.net_wage or 0 or '')
