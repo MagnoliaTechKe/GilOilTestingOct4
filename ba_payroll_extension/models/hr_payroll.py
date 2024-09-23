@@ -19,8 +19,8 @@ class HrPayslip(models.Model):
     @api.depends('employee_id', 'date_from', 'date_to')
     def _compute_overtime_hours(self):
         for payslip in self:
-            overtime_weekdays = 0
-            overtime_sunday_holiday = 0
+            overtime_weekdays_minutes = 0
+            overtime_sunday_holiday_minutes = 0
 
             # Fetch actual attendance records for the employee
             attendance_records = self.env['hr.attendance'].search([
@@ -34,19 +34,24 @@ class HrPayslip(models.Model):
 
             for attendance in attendance_records:
                 attendance_day = attendance.check_in.weekday()  # 0 = Monday, 6 = Sunday
-                overtime_hours = attendance.overtime_hours  # Use the existing overtime_hours from hr.attendance
+                overtime_hours = attendance.overtime_hours  # Assume this is a float representing hours
+
+                # Convert the float to hours and minutes
+                hours = int(overtime_hours)
+                minutes = int((overtime_hours - hours) * 60)
+                total_minutes = hours * 60 + minutes
 
                 # Check if it's a Sunday or public holiday
                 if attendance_day == 6 or attendance.check_in.date() in public_holidays:
                     # Overtime 2 for Sundays and Public Holidays
-                    overtime_sunday_holiday += overtime_hours
+                    overtime_sunday_holiday_minutes += total_minutes
                 elif 0 <= attendance_day <= 4:  # Weekdays (Monday to Friday)
                     # Overtime for weekdays
-                    overtime_weekdays += overtime_hours
+                    overtime_weekdays_minutes += total_minutes
 
-            # Set the computed overtime hours on the payslip
-            payslip.overtime_hours_weekdays = overtime_weekdays
-            payslip.overtime_hours_sunday_holiday = overtime_sunday_holiday
+            # Convert total minutes back to float hours
+            payslip.overtime_hours_weekdays = overtime_weekdays_minutes / 60.0
+            payslip.overtime_hours_sunday_holiday = overtime_sunday_holiday_minutes / 60.0
 
     # @api.depends('employee_id', 'date_from', 'date_to')
     # def _compute_overtime_hours(self):
