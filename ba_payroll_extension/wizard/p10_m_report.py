@@ -66,7 +66,7 @@ class P10ReportWizard(models.TransientModel):
             employee_data = [
                 employee.identification_id,
                 employee.name,
-                employee.pin,
+                employee.l10n_ke_kra_pin,
                 contract.wage,
 
             ]
