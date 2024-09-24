@@ -159,3 +159,6 @@ class HrPayslip(models.Model):
     #     self.update({'input_line_ids': input_data})
     #     return res
 
+    def action_print_payslip(self):
+        # records = self.env['hr.payslip'].browse(self.ids)
+        return self.env.ref('hr_payroll.action_report_payslip').report_action(self)

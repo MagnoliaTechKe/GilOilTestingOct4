@@ -12,14 +12,13 @@
     'data': [
         'data/payroll_data.xml',
         'security/ir.model.access.csv',
-        # 'report/hr_payroll_report_inh.xml',
-        'views/hr_payroll.xml',
+        'report/hr_payroll_report_inh.xml',
         'wizard/monthly_bank_report_wizard_views.xml',
         'wizard/p10_report.xml',
-        'wizard/p10_m_report.xml'
+        'wizard/p10_m_report.xml',
+        'views/hr_payroll.xml'
     ],
     'installable': True,
     'auto_install': False,
     "application": False,
 }
-
