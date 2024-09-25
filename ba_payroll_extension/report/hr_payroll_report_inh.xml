@@ -11,12 +11,12 @@
                             <div class="col-full" style="width: 100%; border: 1px solid #ddd; padding: 10px; box-sizing: border-box;">
                                 <!-- Print the single payslip -->
                                 <t t-foreach="docs" t-as="payslip">
-                                    <span style="font-size: 14px;">
+                                    <span style="font-size: 11.5px;">
                                         <b t-field="payslip.company_id.name"/>
                                     </span>
                                     <br></br>
                                     <span>
-                                        <span style="font-size: 14px;">
+                                        <span style="font-size: 11.5px;">
                                             <b>PAYSLIP
                                                 :
                                                 <span t-esc="payslip.name.split(' ')[5] if len(payslip.name.split(' ')) > 5 else ''"/>
@@ -25,7 +25,7 @@
                                         </span>
                                     </span>
                                     <table name="employee-infos" id="employee_info_table_1" class="table table-sm"
-                                           style="border-top: 1px solid black; font-size:14px;border-collapse: collapse;">
+                                           style="border-top: 1px solid black; font-size:11.5px;border-collapse: collapse;">
                                         <tr id="employee_info_line_1" style="border: none;">
                                             <td style="border: none;">
                                                 <strong>Name:</strong>
@@ -107,7 +107,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table class="table table-sm" style="font-size:14px;" t-if="not payslip.struct_id.hide_basic_on_pdf">
+                                    <table class="table table-sm" style="font-size:11.5px;" t-if="not payslip.struct_id.hide_basic_on_pdf">
                                         <thead>
                                             <tr style="border-top: 1px solid black;">
                                                 <th style="text-align:left">Description</th>
@@ -157,12 +157,12 @@
                                 <div class="col-half" style="width: 48%; border: 1px solid #ddd; padding: 10px; box-sizing: border-box;">
                                     <t t-if="index &lt; total_payslips">
                                         <t t-foreach="docs[index:index+1]" t-as="payslip">
-                                            <span style="font-size: 14px;">
+                                            <span style="font-size: 11.5px;">
                                                 <b t-field="payslip.company_id.name"/>
                                             </span>
                                             <br></br>
                                             <span>
-                                                <span style="font-size: 14px;">
+                                                <span style="font-size: 11.5px;">
                                                     <b>PAYSLIP
                                                         :
                                                         <span t-esc="payslip.name.split(' ')[5] if len(payslip.name.split(' ')) > 5 else ''"/>
@@ -171,7 +171,7 @@
                                                 </span>
                                             </span>
                                             <table name="employee-infos" id="employee_info_table_1" class="table table-sm"
-                                                   style="border-top: 1px solid black; font-size:14px;border-collapse: collapse;">
+                                                   style="border-top: 1px solid black; font-size:11.5px;border-collapse: collapse;">
                                                 <tr id="employee_info_line_1" style="border: none;">
                                                     <td style="border: none;">
                                                         <strong>Name:</strong>
@@ -253,7 +253,7 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <table class="table table-sm" style="font-size:14px;" t-if="not payslip.struct_id.hide_basic_on_pdf">
+                                            <table class="table table-sm" style="font-size:11.5px;" t-if="not payslip.struct_id.hide_basic_on_pdf">
                                                 <thead>
                                                     <tr style="border-top: 1px solid black;">
                                                         <th style="text-align:left">Description</th>
@@ -296,12 +296,12 @@
                                 <div class="col-half" style="width: 48%; border: 1px solid #ddd; padding: 10px; box-sizing: border-box;">
                                     <t t-if="index + 1 &lt; total_payslips">
                                         <t t-foreach="docs[index+1:index+2]" t-as="payslip">
-                                            <span style="font-size: 14px;">
+                                            <span style="font-size: 11.5px;">
                                                 <b t-field="payslip.company_id.name"/>
                                             </span>
                                             <br></br>
                                             <span>
-                                                <span style="font-size: 14px;">
+                                                <span style="font-size: 11.5px;">
                                                     <b>PAYSLIP
                                                         :
                                                         <span t-esc="payslip.name.split(' ')[5] if len(payslip.name.split(' ')) > 5 else ''"/>
@@ -310,7 +310,7 @@
                                                 </span>
                                             </span>
                                             <table name="employee-infos" id="employee_info_table_1" class="table table-sm"
-                                                   style="border-top: 1px solid black; font-size:14px;border-collapse: collapse;">
+                                                   style="border-top: 1px solid black; font-size:11.5px;border-collapse: collapse;">
                                                 <tr id="employee_info_line_1" style="border: none;">
                                                     <td style="border: none;">
                                                         <strong>Name:</strong>
@@ -392,7 +392,7 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <table class="table table-sm" style="font-size:14px;" t-if="not payslip.struct_id.hide_basic_on_pdf">
+                                            <table class="table table-sm" style="font-size:11.5px;" t-if="not payslip.struct_id.hide_basic_on_pdf">
                                                 <thead>
                                                     <tr style="border-top: 1px solid black;">
                                                         <th style="text-align:left">Description</th>
