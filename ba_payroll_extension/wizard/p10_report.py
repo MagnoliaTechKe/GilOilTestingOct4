@@ -114,14 +114,44 @@ class P10ReportWizard(models.TransientModel):
         for payslip in payslips:
             employee = payslip.employee_id
             contract = payslip.contract_id
+            salary_computation = payslip.line_ids
+            house_allowance = ''
+            transport_allowance = ''
+            overtime_allowance = ''
+            directors_allowance = ''
+            lump_allowance = ''
+            other_allowance = ''
+            car_allowance = ''
 
+            for line in salary_computation:
+                if line.name == 'House Allowances':
+                    house_allowance = line.total
+                if line.name == 'Transport Allowance':
+                    transport_allowance = line.total
+                if line.name == 'Overtime allowance':
+                    overtime_allowance = line.total
+                if line.name == 'Directors Fee':
+                    directors_allowance = line.total
+                if line.name == 'Lump sum Payment':
+                    lump_allowance = line.total
+                if line.name == 'Other Allowances':
+                    other_allowance = line.total
+                if line.name == 'Car Benefit':
+                    car_allowance = line.total
             # Assuming fields exist or have been added to the employee model
             employee_data = [
-                employee.pin,
+                employee.l10n_ke_kra_pin,
                 employee.name,
                 employee.country_id.name,
                 employee.employee_type,
                 contract.wage,
+                house_allowance,
+                transport_allowance,
+                overtime_allowance,
+                directors_allowance,
+                lump_allowance,
+                other_allowance,
+                car_allowance,
             ]
             worksheet.write_row(row, 0, employee_data, normal_format)
             row += 1
