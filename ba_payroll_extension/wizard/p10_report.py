@@ -115,21 +115,17 @@ class P10ReportWizard(models.TransientModel):
             employee = payslip.employee_id
             contract = payslip.contract_id
             salary_computation = payslip.line_ids
-            house_allowance = ''
-            transport_allowance = ''
-            overtime_allowance = ''
-            directors_allowance = ''
-            lump_allowance = ''
-            other_allowance = ''
-            car_allowance = ''
+            house_allowance = transport_allowance = leave_allowance = overtime1_allowance = overtime2_allowance = directors_allowance = lump_allowance = other_allowance = car_allowance = 0
 
             for line in salary_computation:
                 if line.name == 'House Allowances':
                     house_allowance = line.total
                 if line.name == 'Transport Allowance':
                     transport_allowance = line.total
-                if line.name == 'Overtime allowance':
-                    overtime_allowance = line.total
+                if line.name == 'Overtime 1 (OT1)':
+                    overtime1_allowance = line.total
+                if line.name == 'Overtime 2 (OT2)':
+                    overtime2_allowance = line.total
                 if line.name == 'Directors Fee':
                     directors_allowance = line.total
                 if line.name == 'Lump sum Payment':
@@ -138,6 +134,7 @@ class P10ReportWizard(models.TransientModel):
                     other_allowance = line.total
                 if line.name == 'Car Benefit':
                     car_allowance = line.total
+            overtime = overtime1_allowance + overtime2_allowance
             # Assuming fields exist or have been added to the employee model
             employee_data = [
                 employee.l10n_ke_kra_pin,
@@ -147,7 +144,8 @@ class P10ReportWizard(models.TransientModel):
                 contract.wage,
                 house_allowance,
                 transport_allowance,
-                overtime_allowance,
+                leave_allowance,
+                overtime,
                 directors_allowance,
                 lump_allowance,
                 other_allowance,
