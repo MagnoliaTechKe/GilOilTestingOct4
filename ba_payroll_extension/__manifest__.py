@@ -16,7 +16,8 @@
         'wizard/monthly_bank_report_wizard_views.xml',
         'wizard/p10_report.xml',
         'wizard/p10_m_report.xml',
-        'views/hr_payroll.xml'
+        'views/hr_payroll.xml',
+        'views/res_partner_bank_view.xml'
     ],
     'installable': True,
     'auto_install': False,

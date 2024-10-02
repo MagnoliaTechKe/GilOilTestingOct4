@@ -95,7 +95,7 @@
                                                 <strong>Bank Branch:</strong>
                                             </td>
                                             <td style="border: none;">
-                                                <span t-field="payslip.employee_id.bank_account_id.bank_id">Equity Bank Branch</span>
+                                                <span t-field="payslip.employee_id.bank_account_id.bank_branch">Equity Bank Branch</span>
                                             </td>
                                         </tr>
                                         <tr id="employee_info_line_10" style="border: none;">
@@ -127,7 +127,8 @@
                                                     </t>
                                                     <tr t-att-class="line_class" t-att-style="line_style" id="line_display">
                                                         <td id="payslip_line_name">
-                                                            <span t-field="line.name"/>
+                                                            <span t-field="line.name"
+                                                                  t-att-style="'font-weight:bold; text-decoration:underline;' if line.code in ['GROSS', 'TOTALDED','NET'] else ''"/>
                                                         </td>
                                                         <td id="payslip_line_rate"></td>
                                                         <td id="payslip_line_quantity">
@@ -136,7 +137,7 @@
                                                         <td id="payslip_line_total" class="text-end">
                                                             <span t-esc="line.total"
                                                                   t-options='{"widget": "monetary", "display_currency": payslip.company_id.currency_id}'
-                                                                  t-att-style="'color:#875A7B;' if line.total &lt; 0 else ''"/>
+                                                                  t-att-style="'color:#875A7B;' if line.total &lt; 0 else ('font-weight:bold; text-decoration:underline;' if line.code in ['GROSS', 'TOTALDED','NET'] else '')"/>
                                                         </td>
                                                     </tr>
                                                 </span>
@@ -241,7 +242,7 @@
                                                         <strong>Bank Branch:</strong>
                                                     </td>
                                                     <td style="border: none;">
-                                                        <span t-field="payslip.employee_id.bank_account_id.bank_id">Equity Bank Branch</span>
+                                                        <span t-field="payslip.employee_id.bank_account_id.bank_branch">Equity Bank Branch</span>
                                                     </td>
                                                 </tr>
                                                 <tr id="employee_info_line_10" style="border: none;">
@@ -253,7 +254,8 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <table class="table table-sm" style="font-size:11.5px; margin-left: -10px" t-if="not payslip.struct_id.hide_basic_on_pdf">
+                                            <table class="table table-sm" style="font-size:11.5px; margin-left: -10px"
+                                                   t-if="not payslip.struct_id.hide_basic_on_pdf">
                                                 <thead>
                                                     <tr style="border-top: 1px solid black;">
                                                         <th style="text-align:left">Description</th>
@@ -273,7 +275,8 @@
                                                             </t>
                                                             <tr t-att-class="line_class" t-att-style="line_style" id="line_display">
                                                                 <td id="payslip_line_name">
-                                                                    <span t-field="line.name"/>
+                                                                    <span t-field="line.name"
+                                                                          t-att-style="'font-weight:bold; text-decoration:underline;' if line.code in ['GROSS', 'TOTALDED','NET'] else ''"/>
                                                                 </td>
                                                                 <td id="payslip_line_rate"></td>
                                                                 <td id="payslip_line_quantity">
@@ -282,7 +285,7 @@
                                                                 <td id="payslip_line_total" class="text-end">
                                                                     <span t-esc="line.total"
                                                                           t-options='{"widget": "monetary", "display_currency": payslip.company_id.currency_id}'
-                                                                          t-att-style="'color:#875A7B;' if line.total &lt; 0 else ''"/>
+                                                                          t-att-style="'color:#875A7B;' if line.total &lt; 0 else ('font-weight:bold; text-decoration:underline;' if line.code in ['GROSS', 'TOTALDED','NET'] else '')"/>
                                                                 </td>
                                                             </tr>
                                                         </span>
@@ -380,7 +383,7 @@
                                                         <strong>Bank Branch:</strong>
                                                     </td>
                                                     <td style="border: none;">
-                                                        <span t-field="payslip.employee_id.bank_account_id.bank_id">Equity Bank Branch</span>
+                                                        <span t-field="payslip.employee_id.bank_account_id.bank_branch">Equity Bank Branch</span>
                                                     </td>
                                                 </tr>
                                                 <tr id="employee_info_line_10" style="border: none;">
@@ -392,7 +395,8 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <table class="table table-sm" style="font-size:11.5px;margin-left:10px" t-if="not payslip.struct_id.hide_basic_on_pdf">
+                                            <table class="table table-sm" style="font-size:11.5px;margin-left:10px"
+                                                   t-if="not payslip.struct_id.hide_basic_on_pdf">
                                                 <thead>
                                                     <tr style="border-top: 1px solid black;">
                                                         <th style="text-align:left">Description</th>
@@ -412,7 +416,8 @@
                                                             </t>
                                                             <tr t-att-class="line_class" t-att-style="line_style" id="line_display">
                                                                 <td id="payslip_line_name">
-                                                                    <span t-field="line.name"/>
+                                                                    <span t-field="line.name"
+                                                                          t-att-style="'font-weight:bold; text-decoration:underline;' if line.code in ['GROSS', 'TOTALDED','NET'] else ''"/>
                                                                 </td>
                                                                 <td id="payslip_line_rate"></td>
                                                                 <td id="payslip_line_quantity">
@@ -421,7 +426,7 @@
                                                                 <td id="payslip_line_total" class="text-end">
                                                                     <span t-esc="line.total"
                                                                           t-options='{"widget": "monetary", "display_currency": payslip.company_id.currency_id}'
-                                                                          t-att-style="'color:#875A7B;' if line.total &lt; 0 else ''"/>
+                                                                          t-att-style="'color:#875A7B;' if line.total &lt; 0 else ('font-weight:bold; text-decoration:underline;' if line.code in ['GROSS', 'TOTALDED','NET'] else '')"/>
                                                                 </td>
                                                             </tr>
                                                         </span>
