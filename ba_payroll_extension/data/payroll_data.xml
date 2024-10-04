@@ -1,7 +1,7 @@
 <odoo>
     <!-- Overtime 1 Salary Rule -->
     <record id="salary_rule_overtime_1" model="hr.salary.rule">
-        <field name="name">Overtime 1 (OT1)</field>
+        <field name="name">Overtime@1.5</field>
         <field name="code">OT1</field>
         <field name="category_id" ref="hr_payroll.ALW"/>
         <field name="sequence">2</field>
@@ -18,7 +18,7 @@ result = (contract.wage / 192) * payslip.overtime_hours_weekdays * 1.5
 
     <!-- Overtime 2 Salary Rule -->
     <record id="salary_rule_overtime_2" model="hr.salary.rule">
-        <field name="name">Overtime 2 (OT2)</field>
+        <field name="name">Overtime@2.0</field>
         <field name="code">OT2</field>
         <field name="category_id" ref="hr_payroll.ALW"/>
         <field name="sequence">3</field>
